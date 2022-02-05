@@ -4,7 +4,7 @@ DIRECTORIES := $(patsubst %/,%,$(wildcard */))
 SODIR := ../$(LIBDIR)
 LIBDIR := ../../$(LIBDIR)
 BINDIR := ../../$(BINDIR)
-CFLAGS += -nostdlib -I$(LIBDIR)
+CFLAGS += -I$(LIBDIR)
 
 export CFLAGS BINDIR LIBDIR SODIR
 

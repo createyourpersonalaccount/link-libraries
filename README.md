@@ -9,3 +9,7 @@ The programs are all in `src/<program_name>`. Each program has a makefile in its
 The intermediate makefile in `src/` calls each makefile under `src/<program_name/` after setting up some common variables. Because the behavior of linking a program under `src/` to libraries in `lib/` is common, it is written out in the makefile `src/Template` and included in others.
 
 The recipes for building dynamic and static executables is located in the template file. For static compilation, we simply include the object files in the gcc compilation line, while for dynamic compilation, we use the linker option `-rpath` to pass the directory where the shared object files lie. Note that `-Wl` is used because the linker option is passed via `gcc`; moreover, we must pass `"$ORIGIN"` to signify that we wish the lookup to be relative to the executables' location.
+
+# Fedora and static compilation
+
+Fedora does not like statically compiled executables and I did not wish to install the `glibc-static` package, which is why the `src/myprog/myprog.c` file does not use the standard C library and instead uses assembly to call the `exit()` syscall. It also explains the `-nostdlib` flag in its corresponding makefile.
